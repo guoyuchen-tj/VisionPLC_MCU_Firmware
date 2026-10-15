@@ -137,12 +137,32 @@ static AL_S32 FpgaS2Regression(AL_VOID)
     AL_LOG(AL_LOG_LEVEL_NOTICE,
            "APB SCRATCH 10000/10000, errors=0 PASS\r\n");
 
+    /* MCU debug reset does not reset the FPGA register bank.  Clear any
+       latched S3 event from an earlier run before testing the S2 IRQ source. */
     if (FpgaWrite(APB_IRQ_ENABLE, 0U) != 0 ||
-        FpgaWrite(APB_IRQ_TEST, IRQ_TEST) != 0 ||
-        FpgaRead(APB_IRQ_STATUS, &Data) != 0 || Data != IRQ_TEST ||
-        FpgaWrite(APB_IRQ_STATUS, IRQ_TEST) != 0 ||
-        FpgaRead(APB_IRQ_STATUS, &Data) != 0 || Data != 0U)
+        FpgaWrite(APB_IRQ_STATUS, IRQ_ALL) != 0 ||
+        FpgaRead(APB_IRQ_STATUS, &Data) != 0 || Data != 0U) {
+        AL_LOG(AL_LOG_LEVEL_NOTICE,
+               "APB IRQ pre-clear FAIL, status=0x%08x\r\n",
+               (unsigned int)Data);
         return -1;
+    }
+
+    if (FpgaWrite(APB_IRQ_TEST, IRQ_TEST) != 0 ||
+        FpgaRead(APB_IRQ_STATUS, &Data) != 0 || Data != IRQ_TEST) {
+        AL_LOG(AL_LOG_LEVEL_NOTICE,
+               "APB IRQ inject FAIL, status=0x%08x\r\n",
+               (unsigned int)Data);
+        return -1;
+    }
+
+    if (FpgaWrite(APB_IRQ_STATUS, IRQ_TEST) != 0 ||
+        FpgaRead(APB_IRQ_STATUS, &Data) != 0 || Data != 0U) {
+        AL_LOG(AL_LOG_LEVEL_NOTICE,
+               "APB IRQ W1C FAIL, status=0x%08x\r\n",
+               (unsigned int)Data);
+        return -1;
+    }
 
     AL_LOG(AL_LOG_LEVEL_NOTICE,
            "APB IRQ source polling PASS\r\n");
