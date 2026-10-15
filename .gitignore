@@ -1,0 +1,42 @@
+# FutureDynasty build products
+**/build/
+**/Debug/
+**/Release/
+*.o
+*.obj
+*.d
+*.lst
+*.su
+*.elf
+*.bin
+*.hex
+*.s19
+*.map
+*.lss
+*.dump
+
+# TD generated runs and logs
+**/*_Runs/
+/MCU_FPGA/log/
+*.log
+*.logw
+*.lock.f
+*.begin.f
+*.temp.f
+*.db
+*.bit
+*.bid
+*.timing
+*.qor
+
+# Simulator and editor state
+**/sim_work/
+**/transcript
+*.wlf
+*.pyc
+__pycache__/
+.recent_user_depot.ini
+.IpToolIpDataBackupDir_*/
+*~
+*.bak
+*.swp

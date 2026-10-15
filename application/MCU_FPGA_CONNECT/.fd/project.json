@@ -1,0 +1,14 @@
+{
+    "arch": "rv32",
+    "bspLocation": "D:/FD_Alogic/MCU_FPGA",
+    "bspName": "MCU_FPGA",
+    "chip": "ph1p35",
+    "languageType": "C",
+    "location": "D:/FD_Alogic/MCU_FPGA_CONNECT",
+    "name": "MCU_FPGA_CONNECT",
+    "os": "standalone",
+    "processor": "rpu",
+    "templateName": "HELLOWORLD",
+    "toolVersion": "862c784 (2026-09-02-16:28)",
+    "type": "application"
+}

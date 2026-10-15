@@ -1,0 +1,11 @@
+{
+    "arch": "rv32",
+    "chip": "ph1p35",
+    "hpfFile": "D:/FD_Alogic/MCU_FPGA/hx1p35_mcu_top.hpf",
+    "location": "D:/FD_Alogic/MCU_FPGA",
+    "name": "MCU_FPGA",
+    "os": "standalone",
+    "processor": "rpu",
+    "toolVersion": "862c784 (2026-09-02-16:28)",
+    "type": "platform"
+}
